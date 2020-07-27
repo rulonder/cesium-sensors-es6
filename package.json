@@ -17,9 +17,7 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build"
   },
-  "peerDependencies": {
-    "cesium": "^1.71.0"
-  },
+  "peerDependencies": {  },
   "husky": {
     "hooks": {
       "pre-commit": "tsdx lint"
@@ -44,5 +42,7 @@
     "tslib": "^2.0.0",
     "typescript": "^3.9.7"
   },
-  "dependencies": { }
+  "dependencies": { 
+    "cesium": "^1.71.0"
+  }
 }

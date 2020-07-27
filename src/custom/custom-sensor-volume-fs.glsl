@@ -75,20 +75,20 @@ void main()
     float ellipsoidValue = ellipsoidSurfaceFunction( v_positionWC);
 
     // Occluded by the ellipsoid?
-	if (!u_showThroughEllipsoid)
-	{
-	    // Discard if in the ellipsoid    
-	    // PERFORMANCE_IDEA: A coarse check for ellipsoid intersection could be done on the CPU first.
-	    if (ellipsoidValue < 0.0)
-	    {
+    if (!u_showThroughEllipsoid)
+    {
+        // Discard if in the ellipsoid    
+        // PERFORMANCE_IDEA: A coarse check for ellipsoid intersection could be done on the CPU first.
+        if (ellipsoidValue < 0.0)
+        {
             discard;
-	    }
+        }
 
-	    // Discard if in the sensor's shadow
-	    if (inSensorShadow(sensorVertexWC, v_positionWC))
-	    {
-	        discard;
-	    }
+        // Discard if in the sensor's shadow
+        if (inSensorShadow(sensorVertexWC, v_positionWC))
+        {
+            discard;
+        }
     }
 
     // Discard if not in the sensor's sphere
