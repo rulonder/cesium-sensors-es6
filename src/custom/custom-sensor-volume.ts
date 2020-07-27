@@ -371,7 +371,6 @@ CustomSensorVolume.prototype.update = function(frameState) {
 
   var context = frameState.context;
   var commandList = frameState.commandList;
-  console.log(context);
   // >>includeStart('debug', pragmas.debug);
   if (this.radius < 0.0) {
     throw new DeveloperError(

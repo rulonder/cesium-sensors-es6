@@ -1,8 +1,12 @@
 {
-  "version": "1.71.0",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rulonder/cesium-sensors-es6.git"
+  },
   "files": [
     "dist",
     "src"
