@@ -35,4 +35,6 @@ declare module "cesium" {
         getValueOrDefault(value, time, defaultValue);
         getValueOrUndefined(value, time, defaultValue?);
     }
+    export function createMaterialPropertyDescriptor (s:string):PropertyDescriptor
+    export function createPropertyDescriptor (s:string):PropertyDescriptor
 }

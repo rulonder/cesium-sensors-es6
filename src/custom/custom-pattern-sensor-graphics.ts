@@ -2,8 +2,8 @@ import { defaultValue } from 'cesium';
 import { defined } from 'cesium';
 import { DeveloperError } from 'cesium';
 import { Event } from 'cesium';
-import createMaterialPropertyDescriptor from 'cesium/Source/DataSources/createMaterialPropertyDescriptor';
-import createPropertyDescriptor from 'cesium/Source/DataSources/createPropertyDescriptor';
+import { createMaterialPropertyDescriptor } from 'cesium';
+import { createPropertyDescriptor } from 'cesium';
 
 var defineProperties = Object.defineProperties;
 /**
