@@ -37,4 +37,36 @@ declare module "cesium" {
     }
     export function createMaterialPropertyDescriptor (s:string):PropertyDescriptor
     export function createPropertyDescriptor (s:string):PropertyDescriptor
+    export class Buffer{
+        static createVertexBuffer(options:any):any
+    }
+    export class BufferUsage {
+        static STATIC_DRAW;
+    }
+    export class DrawCommand {}
+    export class Pass{
+        static ENVIRONMENT
+        static COMPUTE
+        static GLOBE
+        static TERRAINSSIFICATION
+        static CESIUMTILE
+        static CESIUMTILE_CLASSIFICATION
+        static CESIUMTILE_CLASSIFICATION_IGNORE_SHOW
+        static OPAQUE
+        static TRANSLUCENT
+        static OVERLAY
+        static NUMBER_OF_PASSES
+    };
+    export class RenderState{
+        static fromCache(options:any)
+    }
+    export class ShaderProgram{
+        static replaceCache
+    };
+    export class ShaderSource{
+        constructor(options:any)
+    };
+    export class VertexArray{
+        constructor(options:any)
+    }
 }
