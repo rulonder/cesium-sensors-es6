@@ -22,8 +22,10 @@ import { CullFace } from 'cesium';
 import { Material } from 'cesium';
 import { SceneMode } from 'cesium';
 
-import CustomSensorVolumeFS from './custom-sensor-volume-fs.glsl';
-import CustomSensorVolumeVS from './custom-sensor-volume-vs.glsl';
+import CustomSensorVolumeFS1 from './custom-sensor-volume-fs.glsl';
+import CustomSensorVolumeVS1 from './custom-sensor-volume-vs.glsl';
+import CustomSensorVolumeFS2 from './custom-sensor-volume-fs2.glsl';
+import CustomSensorVolumeVS2 from './custom-sensor-volume-vs2.glsl';
 import SensorVolume from './sensor-volume.glsl';
 
 var defineProperties = Object.defineProperties;
@@ -31,6 +33,14 @@ var attributeLocations = {
   position: 0,
   normal: 1,
 };
+
+const getCustomSensorVolumeFS = function(webgl2:boolean=false) {
+  return webgl2?CustomSensorVolumeFS2:CustomSensorVolumeFS1;
+}
+
+const getCustomSensorVolumeVS = function(webgl2:boolean=false) {
+  return webgl2?CustomSensorVolumeVS2:CustomSensorVolumeVS1;
+}
 
 var FAR = 5906376272000.0; // distance from the Sun to Pluto in meters.
 
@@ -72,6 +82,14 @@ export var CustomSensorVolume = function(this: any, options?) {
    * @default true
    */
   this.show = defaultValue(options.show, true);
+
+  /**
+   * <code>true</code> if webgl2 context is used, <code>false</code>
+   *
+   * @type {Boolean}
+   * @default true
+   */
+  this.webgl2 = defaultValue(options.webgl2, false);
 
   /**
    * When <code>true</code>, a polyline is shown where the sensor outline intersections the globe.
@@ -512,14 +530,14 @@ CustomSensorVolume.prototype.update = function(frameState) {
         sources: [
           SensorVolume,
           this._lateralSurfaceMaterial.shaderSource,
-          CustomSensorVolumeFS,
+          getCustomSensorVolumeFS(this.webgl2),
         ],
       });
 
       frontFaceColorCommand.shaderProgram = ShaderProgram.replaceCache({
         context: context,
         shaderProgram: frontFaceColorCommand.shaderProgram,
-        vertexShaderSource: CustomSensorVolumeVS,
+        vertexShaderSource: getCustomSensorVolumeVS(this.webgl2),
         fragmentShaderSource: fsSource,
         attributeLocations: attributeLocations,
       });
@@ -565,7 +583,7 @@ CustomSensorVolume.prototype.update = function(frameState) {
         sources: [
           SensorVolume,
           this._lateralSurfaceMaterial.shaderSource,
-          CustomSensorVolumeFS,
+          getCustomSensorVolumeFS(this.webgl2),
         ],
         pickColorQualifier: 'uniform',
       });
@@ -573,7 +591,7 @@ CustomSensorVolume.prototype.update = function(frameState) {
       pickCommand.shaderProgram = ShaderProgram.replaceCache({
         context: context,
         shaderProgram: pickCommand.shaderProgram,
-        vertexShaderSource: CustomSensorVolumeVS,
+        vertexShaderSource: getCustomSensorVolumeVS(this.webgl2),
         fragmentShaderSource: pickFS,
         attributeLocations: attributeLocations,
       });

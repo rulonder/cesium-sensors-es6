@@ -6,6 +6,7 @@ import { DeveloperError } from 'cesium';
 import { Math as CesiumMath } from 'cesium';
 import { Spherical } from 'cesium';
 import { CustomSensorVolume } from '../custom/custom-sensor-volume';
+import { isWebGl2Context } from 'util/webGLContext';
 var defineProperties = Object.defineProperties;
 
 function assignSpherical(index, array, clock, cone) {
@@ -50,6 +51,7 @@ export function RectangularPyramidSensorVolume(this: any, options?) {
     this
   );
   customSensorOptions.directions = undefined;
+  customSensorOptions.webgl2 =isWebGl2Context(this._scene);
   this._customSensor = new CustomSensorVolume(customSensorOptions);
 
   this._xHalfAngle = defaultValue(options.xHalfAngle, CesiumMath.PI_OVER_TWO);
