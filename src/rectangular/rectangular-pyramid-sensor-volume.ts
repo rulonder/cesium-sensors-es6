@@ -6,7 +6,7 @@ import { DeveloperError } from 'cesium';
 import { Math as CesiumMath } from 'cesium';
 import { Spherical } from 'cesium';
 import { CustomSensorVolume } from '../custom/custom-sensor-volume';
-import { isWebGl2Context } from 'util/webGLContext';
+
 var defineProperties = Object.defineProperties;
 
 function assignSpherical(index, array, clock, cone) {
@@ -51,7 +51,7 @@ export function RectangularPyramidSensorVolume(this: any, options?) {
     this
   );
   customSensorOptions.directions = undefined;
-  customSensorOptions.webgl2 =isWebGl2Context(this._scene);
+  customSensorOptions.webgl2 = options.webgl2;
   this._customSensor = new CustomSensorVolume(customSensorOptions);
 
   this._xHalfAngle = defaultValue(options.xHalfAngle, CesiumMath.PI_OVER_TWO);
@@ -62,10 +62,10 @@ export function RectangularPyramidSensorVolume(this: any, options?) {
 
 defineProperties(RectangularPyramidSensorVolume.prototype, {
   xHalfAngle: {
-    get: function() {
+    get: function () {
       return this._xHalfAngle;
     },
-    set: function(value) {
+    set: function (value) {
       // >>includeStart('debug', pragmas.debug)
       if (value > CesiumMath.PI_OVER_TWO) {
         throw new DeveloperError(
@@ -81,10 +81,10 @@ defineProperties(RectangularPyramidSensorVolume.prototype, {
     },
   },
   yHalfAngle: {
-    get: function() {
+    get: function () {
       return this._yHalfAngle;
     },
-    set: function(value) {
+    set: function (value) {
       // >>includeStart('debug', pragmas.debug)
       if (value > CesiumMath.PI_OVER_TWO) {
         throw new DeveloperError(
@@ -100,88 +100,88 @@ defineProperties(RectangularPyramidSensorVolume.prototype, {
     },
   },
   show: {
-    get: function() {
+    get: function () {
       return this._customSensor.show;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.show = value;
     },
   },
   showIntersection: {
-    get: function() {
+    get: function () {
       return this._customSensor.showIntersection;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.showIntersection = value;
     },
   },
   showThroughEllipsoid: {
-    get: function() {
+    get: function () {
       return this._customSensor.showThroughEllipsoid;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.showThroughEllipsoid = value;
     },
   },
   modelMatrix: {
-    get: function() {
+    get: function () {
       return this._customSensor.modelMatrix;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.modelMatrix = value;
     },
   },
   radius: {
-    get: function() {
+    get: function () {
       return this._customSensor.radius;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.radius = value;
     },
   },
   lateralSurfaceMaterial: {
-    get: function() {
+    get: function () {
       return this._customSensor.lateralSurfaceMaterial;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.lateralSurfaceMaterial = value;
     },
   },
   intersectionColor: {
-    get: function() {
+    get: function () {
       return this._customSensor.intersectionColor;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.intersectionColor = value;
     },
   },
   intersectionWidth: {
-    get: function() {
+    get: function () {
       return this._customSensor.intersectionWidth;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.intersectionWidth = value;
     },
   },
   id: {
-    get: function() {
+    get: function () {
       return this._customSensor.id;
     },
-    set: function(value) {
+    set: function (value) {
       this._customSensor.id = value;
     },
   },
 });
 
-RectangularPyramidSensorVolume.prototype.update = function(frameState) {
+RectangularPyramidSensorVolume.prototype.update = function (frameState) {
   this._customSensor.update(frameState);
 };
 
-RectangularPyramidSensorVolume.prototype.isDestroyed = function() {
+RectangularPyramidSensorVolume.prototype.isDestroyed = function () {
   return false;
 };
 
-RectangularPyramidSensorVolume.prototype.destroy = function() {
+RectangularPyramidSensorVolume.prototype.destroy = function () {
   this._customSensor = this._customSensor && this._customSensor.destroy();
   return destroyObject(this);
 };

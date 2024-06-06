@@ -13,7 +13,8 @@ import { Property as _Property, PropertyExtended } from 'cesium';
 
 import { RectangularPyramidSensorVolume } from './rectangular-pyramid-sensor-volume';
 import { removePrimitive } from '../util/remove-primitive';
-const Property: PropertyExtended = (_Property as unknown) as PropertyExtended;
+import { isWebGl2Context } from '../util/webGLContext';
+const Property: PropertyExtended = _Property as unknown as PropertyExtended;
 
 var defaultIntersectionColor = Color.WHITE;
 var defaultIntersectionWidth = 1.0;
@@ -31,7 +32,7 @@ var cachedOrientation = new Quaternion();
  * @param {Scene} scene The scene the primitives will be rendered in.
  * @param {EntityCollection} entityCollection The entityCollection to visualize.
  */
-export var RectangularSensorVisualizer = function(
+export var RectangularSensorVisualizer = function (
   this: any,
   scene,
   entityCollection
@@ -66,7 +67,7 @@ export var RectangularSensorVisualizer = function(
  * @param {JulianDate} time The time to update to.
  * @returns {Boolean} This function always returns true.
  */
-RectangularSensorVisualizer.prototype.update = function(time) {
+RectangularSensorVisualizer.prototype.update = function (time) {
   // >>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
     throw new DeveloperError('time is required.');
@@ -113,7 +114,9 @@ RectangularSensorVisualizer.prototype.update = function(time) {
 
     var primitive = defined(data) ? data.primitive : undefined;
     if (!defined(primitive)) {
-      primitive = new RectangularPyramidSensorVolume();
+      primitive = new RectangularPyramidSensorVolume({
+        webgl2: isWebGl2Context(this._scene),
+      });
       primitive.id = entity;
       primitives.add(primitive);
 
@@ -179,14 +182,14 @@ RectangularSensorVisualizer.prototype.update = function(time) {
  *
  * @returns {Boolean} True if this object was destroyed; otherwise, false.
  */
-RectangularSensorVisualizer.prototype.isDestroyed = function() {
+RectangularSensorVisualizer.prototype.isDestroyed = function () {
   return false;
 };
 
 /**
  * Removes and destroys all primitives created by this instance.
  */
-RectangularSensorVisualizer.prototype.destroy = function() {
+RectangularSensorVisualizer.prototype.destroy = function () {
   var entities = this._entitiesToVisualize.values;
   var hash = this._hash;
   var primitives = this._primitives;
@@ -199,7 +202,7 @@ RectangularSensorVisualizer.prototype.destroy = function() {
 /**
  * @private
  */
-RectangularSensorVisualizer.prototype._onCollectionChanged = function(
+RectangularSensorVisualizer.prototype._onCollectionChanged = function (
   _,
   added,
   removed,

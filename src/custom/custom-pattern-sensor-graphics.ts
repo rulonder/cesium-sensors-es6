@@ -43,7 +43,7 @@ defineProperties(CustomPatternSensorGraphics.prototype, {
    * @readonly
    */
   definitionChanged: {
-    get: function() {
+    get: function () {
       return this._definitionChanged;
     },
   },
@@ -106,7 +106,7 @@ defineProperties(CustomPatternSensorGraphics.prototype, {
  * @param {CustomPatternSensorGraphics} [result] The object onto which to store the result.
  * @returns {CustomPatternSensorGraphics} The modified result parameter or a new instance if one was not provided.
  */
-CustomPatternSensorGraphics.prototype.clone = function(result) {
+CustomPatternSensorGraphics.prototype.clone = function (result) {
   if (!defined(result)) {
     result = new CustomPatternSensorGraphics();
   }
@@ -126,7 +126,7 @@ CustomPatternSensorGraphics.prototype.clone = function(result) {
  *
  * @param {CustomPatternSensorGraphics} source The object to be merged into this object.
  */
-CustomPatternSensorGraphics.prototype.merge = function(source) {
+CustomPatternSensorGraphics.prototype.merge = function (source) {
   // >>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
     throw new DeveloperError('source is required.');

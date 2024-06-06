@@ -34,13 +34,13 @@ var attributeLocations = {
   normal: 1,
 };
 
-const getCustomSensorVolumeFS = function(webgl2:boolean=false) {
-  return webgl2?CustomSensorVolumeFS2:CustomSensorVolumeFS1;
-}
+const getCustomSensorVolumeFS = function (webgl2: boolean = false) {
+  return webgl2 ? CustomSensorVolumeFS2 : CustomSensorVolumeFS1;
+};
 
-const getCustomSensorVolumeVS = function(webgl2:boolean=false) {
-  return webgl2?CustomSensorVolumeVS2:CustomSensorVolumeVS1;
-}
+const getCustomSensorVolumeVS = function (webgl2: boolean = false) {
+  return webgl2 ? CustomSensorVolumeVS2 : CustomSensorVolumeVS1;
+};
 
 var FAR = 5906376272000.0; // distance from the Sun to Pluto in meters.
 
@@ -50,7 +50,7 @@ var FAR = 5906376272000.0; // distance from the Sun to Pluto in meters.
  * @alias CustomSensorVolume
  * @constructor
  */
-export var CustomSensorVolume = function(this: any, options?) {
+export var CustomSensorVolume = function (this: any, options?) {
   options = defaultValue(options, (defaultValue as any).EMPTY_OBJECT);
 
   this._pickId = undefined;
@@ -67,8 +67,10 @@ export var CustomSensorVolume = function(this: any, options?) {
   this._frontFaceColorCommand.boundingVolume = this._boundingSphereWC;
   this._frontFaceColorCommand.owner = this;
 
-  this._backFaceColorCommand.primitiveType = this._frontFaceColorCommand.primitiveType;
-  this._backFaceColorCommand.boundingVolume = this._frontFaceColorCommand.boundingVolume;
+  this._backFaceColorCommand.primitiveType =
+    this._frontFaceColorCommand.primitiveType;
+  this._backFaceColorCommand.boundingVolume =
+    this._frontFaceColorCommand.boundingVolume;
   this._backFaceColorCommand.owner = this;
 
   this._pickCommand.primitiveType = this._frontFaceColorCommand.primitiveType;
@@ -214,22 +216,22 @@ export var CustomSensorVolume = function(this: any, options?) {
 
   /* eslint-disable camelcase */
   this._uniforms = {
-    u_showThroughEllipsoid: function() {
+    u_showThroughEllipsoid: function () {
       return that.showThroughEllipsoid;
     },
-    u_showIntersection: function() {
+    u_showIntersection: function () {
       return that.showIntersection;
     },
-    u_sensorRadius: function() {
+    u_sensorRadius: function () {
       return isFinite(that.radius) ? that.radius : FAR;
     },
-    u_intersectionColor: function() {
+    u_intersectionColor: function () {
       return that.intersectionColor;
     },
-    u_intersectionWidth: function() {
+    u_intersectionWidth: function () {
       return that.intersectionWidth;
     },
-    u_normalDirection: function() {
+    u_normalDirection: function () {
       return 1.0;
     },
   };
@@ -240,10 +242,10 @@ export var CustomSensorVolume = function(this: any, options?) {
 
 defineProperties(CustomSensorVolume.prototype, {
   directions: {
-    get: function() {
+    get: function () {
       return this._directions;
     },
-    set: function(value) {
+    set: function (value) {
       this._directions = value;
       this._directionsDirty = true;
     },
@@ -381,7 +383,7 @@ function createVertexArray(customSensorVolume, context) {
  * @exception {DeveloperError} this.radius must be greater than or equal to zero.
  * @exception {DeveloperError} this.lateralSurfaceMaterial must be defined.
  */
-CustomSensorVolume.prototype.update = function(frameState) {
+CustomSensorVolume.prototype.update = function (frameState) {
   this._mode = frameState.mode;
   if (!this.show || this._mode !== SceneMode.SCENE3D) {
     return;
@@ -487,7 +489,8 @@ CustomSensorVolume.prototype.update = function(frameState) {
         this,
         context
       );
-      this._backFaceColorCommand.vertexArray = this._frontFaceColorCommand.vertexArray;
+      this._backFaceColorCommand.vertexArray =
+        this._frontFaceColorCommand.vertexArray;
       this._pickCommand.vertexArray = this._frontFaceColorCommand.vertexArray;
     }
   }
@@ -512,7 +515,8 @@ CustomSensorVolume.prototype.update = function(frameState) {
   }
 
   this._frontFaceColorCommand.modelMatrix = this.modelMatrix;
-  this._backFaceColorCommand.modelMatrix = this._frontFaceColorCommand.modelMatrix;
+  this._backFaceColorCommand.modelMatrix =
+    this._frontFaceColorCommand.modelMatrix;
   this._pickCommand.modelMatrix = this._frontFaceColorCommand.modelMatrix;
 
   var materialChanged =
@@ -553,7 +557,7 @@ CustomSensorVolume.prototype.update = function(frameState) {
         this._lateralSurfaceMaterial._uniforms
       );
       // eslint-disable-next-line camelcase
-      backFaceColorCommand.uniformMap.u_normalDirection = function() {
+      backFaceColorCommand.uniformMap.u_normalDirection = function () {
         return -1.0;
       };
     }
@@ -599,7 +603,7 @@ CustomSensorVolume.prototype.update = function(frameState) {
       var that = this;
       var uniforms = {
         // eslint-disable-next-line camelcase
-        czm_pickColor: function() {
+        czm_pickColor: function () {
           return that._pickId.color;
         },
       };
@@ -617,14 +621,14 @@ CustomSensorVolume.prototype.update = function(frameState) {
 /**
  * DOC_TBA
  */
-CustomSensorVolume.prototype.isDestroyed = function() {
+CustomSensorVolume.prototype.isDestroyed = function () {
   return false;
 };
 
 /**
  * DOC_TBA
  */
-CustomSensorVolume.prototype.destroy = function() {
+CustomSensorVolume.prototype.destroy = function () {
   this._frontFaceColorCommand.vertexArray =
     this._frontFaceColorCommand.vertexArray &&
     this._frontFaceColorCommand.vertexArray.destroy();

@@ -46,7 +46,7 @@ defineProperties(ConicSensorGraphics.prototype, {
    * @readonly
    */
   definitionChanged: {
-    get: function() {
+    get: function () {
       return this._definitionChanged;
     },
   },
@@ -130,7 +130,7 @@ defineProperties(ConicSensorGraphics.prototype, {
  * @param {ConicSensorGraphics} [result] The object onto which to store the result.
  * @returns {ConicSensorGraphics} The modified result parameter or a new instance if one was not provided.
  */
-ConicSensorGraphics.prototype.clone = function(result) {
+ConicSensorGraphics.prototype.clone = function (result) {
   if (!defined(result)) {
     result = new ConicSensorGraphics();
   }
@@ -153,7 +153,7 @@ ConicSensorGraphics.prototype.clone = function(result) {
  *
  * @param {ConicSensorGraphics} source The object to be merged into this object.
  */
-ConicSensorGraphics.prototype.merge = function(source: any) {
+ConicSensorGraphics.prototype.merge = function (source: any) {
   // >>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
     throw new DeveloperError('source is required.');

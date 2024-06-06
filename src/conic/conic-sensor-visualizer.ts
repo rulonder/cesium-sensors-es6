@@ -13,8 +13,8 @@ import { MaterialProperty } from 'cesium';
 import { Property as _Property, PropertyExtended } from 'cesium';
 import { CustomSensorVolume } from '../custom/custom-sensor-volume';
 import { removePrimitive } from '../util/remove-primitive';
-import { isWebGl2Context } from 'util/webGLContext';
-const Property: PropertyExtended = (_Property as unknown) as PropertyExtended;
+import { isWebGl2Context } from '../util/webGLContext';
+const Property: PropertyExtended = _Property as unknown as PropertyExtended;
 
 var defaultIntersectionColor = Color.WHITE;
 var defaultIntersectionWidth = 1.0;
@@ -118,7 +118,7 @@ export function ConicSensorVisualizer(this: any, scene, entityCollection) {
  * @param {JulianDate} time The time to update to.
  * @returns {Boolean} This function always returns true.
  */
-ConicSensorVisualizer.prototype.update = function(time) {
+ConicSensorVisualizer.prototype.update = function (time) {
   // >>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
     throw new DeveloperError('time is required.');
@@ -165,7 +165,9 @@ ConicSensorVisualizer.prototype.update = function(time) {
 
     var primitive = defined(data) ? data.primitive : undefined;
     if (!defined(primitive)) {
-      primitive = new CustomSensorVolume({webgl2:isWebGl2Context(this._scene)});
+      primitive = new CustomSensorVolume({
+        webgl2: isWebGl2Context(this._scene),
+      });
       primitive.id = entity;
       primitives.add(primitive);
 
@@ -265,14 +267,14 @@ ConicSensorVisualizer.prototype.update = function(time) {
  *
  * @returns {Boolean} True if this object was destroyed; otherwise, false.
  */
-ConicSensorVisualizer.prototype.isDestroyed = function() {
+ConicSensorVisualizer.prototype.isDestroyed = function () {
   return false;
 };
 
 /**
  * Removes and destroys all primitives created by this instance.
  */
-ConicSensorVisualizer.prototype.destroy = function() {
+ConicSensorVisualizer.prototype.destroy = function () {
   var entities = this._entitiesToVisualize.values;
   var hash = this._hash;
   var primitives = this._primitives;
@@ -285,7 +287,7 @@ ConicSensorVisualizer.prototype.destroy = function() {
 /**
  * @private
  */
-ConicSensorVisualizer.prototype._onCollectionChanged = function(
+ConicSensorVisualizer.prototype._onCollectionChanged = function (
   _,
   added,
   removed,

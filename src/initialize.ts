@@ -330,7 +330,7 @@ export function initialize() {
 
   var originalDefaultVisualizersCallback: any =
     DataSourceDisplay.defaultVisualizersCallback;
-  DataSourceDisplay.defaultVisualizersCallback = function(
+  DataSourceDisplay.defaultVisualizersCallback = function (
     scene,
     entityCluster,
     dataSource

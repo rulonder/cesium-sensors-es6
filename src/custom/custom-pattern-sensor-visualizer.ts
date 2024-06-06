@@ -12,8 +12,8 @@ import { Property as _Property, PropertyExtended } from 'cesium';
 
 import { CustomSensorVolume } from '../custom/custom-sensor-volume';
 import { removePrimitive } from '../util/remove-primitive';
-import { isWebGl2Context } from 'util/webGLContext';
-const Property: PropertyExtended = (_Property as unknown) as PropertyExtended;
+import { isWebGl2Context } from '../util/webGLContext';
+const Property: PropertyExtended = _Property as unknown as PropertyExtended;
 
 var defaultIntersectionColor = Color.WHITE;
 var defaultIntersectionWidth = 1.0;
@@ -31,7 +31,7 @@ var cachedOrientation = new Quaternion();
  * @param {Scene} scene The scene the primitives will be rendered in.
  * @param {EntityCollection} entityCollection The entityCollection to visualize.
  */
-export var CustomPatternSensorVisualizer = function(
+export var CustomPatternSensorVisualizer = function (
   this: any,
   scene,
   entityCollection
@@ -66,7 +66,7 @@ export var CustomPatternSensorVisualizer = function(
  * @param {JulianDate} time The time to update to.
  * @returns {Boolean} This function always returns true.
  */
-CustomPatternSensorVisualizer.prototype.update = function(time) {
+CustomPatternSensorVisualizer.prototype.update = function (time) {
   // >>includeStart('debug', pragmas.debug);
   if (!defined(time)) {
     throw new DeveloperError('time is required.');
@@ -118,7 +118,9 @@ CustomPatternSensorVisualizer.prototype.update = function(time) {
 
     var primitive = defined(data) ? data.primitive : undefined;
     if (!defined(primitive)) {
-      primitive = new CustomSensorVolume({webgl2:isWebGl2Context(this._scene)});
+      primitive = new CustomSensorVolume({
+        webgl2: isWebGl2Context(this._scene),
+      });
       primitive.id = entity;
       primitives.add(primitive);
 
@@ -175,14 +177,14 @@ CustomPatternSensorVisualizer.prototype.update = function(time) {
  *
  * @returns {Boolean} True if this object was destroyed; otherwise, false.
  */
-CustomPatternSensorVisualizer.prototype.isDestroyed = function() {
+CustomPatternSensorVisualizer.prototype.isDestroyed = function () {
   return false;
 };
 
 /**
  * Removes and destroys all primitives created by this instance.
  */
-CustomPatternSensorVisualizer.prototype.destroy = function() {
+CustomPatternSensorVisualizer.prototype.destroy = function () {
   var entities = this._entitiesToVisualize.values;
   var hash = this._hash;
   var primitives = this._primitives;
@@ -195,7 +197,7 @@ CustomPatternSensorVisualizer.prototype.destroy = function() {
 /**
  * @private
  */
-CustomPatternSensorVisualizer.prototype._onCollectionChanged = function(
+CustomPatternSensorVisualizer.prototype._onCollectionChanged = function (
   _,
   added,
   removed,

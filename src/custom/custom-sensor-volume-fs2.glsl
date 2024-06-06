@@ -1,7 +1,4 @@
 #version 300 es
-#ifdef GL_OES_standard_derivatives
-    #extension GL_OES_standard_derivatives : enable
-#endif  
 
 uniform bool u_showIntersection;
 uniform bool u_showThroughEllipsoid;

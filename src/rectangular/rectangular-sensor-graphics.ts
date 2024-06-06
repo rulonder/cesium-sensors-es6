@@ -42,7 +42,7 @@ defineProperties(RectangularSensorGraphics.prototype, {
    * @readonly
    */
   definitionChanged: {
-    get: function() {
+    get: function () {
       return this._definitionChanged;
     },
   },
@@ -110,7 +110,7 @@ defineProperties(RectangularSensorGraphics.prototype, {
  * @param {RectangularSensorGraphics} [result] The object onto which to store the result.
  * @returns {RectangularSensorGraphics} The modified result parameter or a new instance if one was not provided.
  */
-RectangularSensorGraphics.prototype.clone = function(result) {
+RectangularSensorGraphics.prototype.clone = function (result) {
   if (!defined(result)) {
     result = new RectangularSensorGraphics();
   }
@@ -131,7 +131,7 @@ RectangularSensorGraphics.prototype.clone = function(result) {
  *
  * @param {RectangularSensorGraphics} source The object to be merged into this object.
  */
-RectangularSensorGraphics.prototype.merge = function(source) {
+RectangularSensorGraphics.prototype.merge = function (source) {
   // >>includeStart('debug', pragmas.debug);
   if (!defined(source)) {
     throw new DeveloperError('source is required.');
