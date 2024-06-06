@@ -121,9 +121,7 @@
       function addRectangularSensor() {
         viewer.scene.primitives.removeAll();
         var rectangularPyramidSensor =
-          new CesiumSensorVolumes.RectangularPyramidSensorVolume({
-            webgl2: true,
-          });
+          new CesiumSensorVolumes.RectangularPyramidSensorVolume();
 
         rectangularPyramidSensor.modelMatrix = getModelMatrix();
         rectangularPyramidSensor.radius = 20000000.0;
