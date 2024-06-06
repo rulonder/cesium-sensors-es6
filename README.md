@@ -18,10 +18,9 @@ The plugin automatically adds support for the CZML properties `agi_conicSensor`,
 
 In order to load data directly into `Entity` objects that you create directly, you must call `entity.addProperty` to create each of the sensor properties you wish to use. The CZML processing does this automatically.
 
-```html
-<script src="path/to/Cesium.js"></script>
-<script src="path/to/cesium-sensors-es6.cjs.development.js"></script>
-<script>
+``` js
+  import * as Cesium from 'cesium';
+  import * as CesiumSensorVolumes from 'cesium-sensors-es6';
   // To create an entity directly
   var entityCollection = new Cesium.EntityCollection();
 
@@ -34,16 +33,13 @@ In order to load data directly into `Entity` objects that you create directly, y
   entity.conicSensor.intersectionColor = new Cesium.ConstantProperty(
     new Cesium.Color(0.1, 0.2, 0.3, 0.4)
   );
-</script>
 ```
 
 ## License
 
 MIT Free for commercial and non-commercial use. See [LICENSE.md](LICENSE.md).
 
-# TSDX Bootstrap
 
-This project was bootstrapped with [TSDX](https://github.com/jaredpalmer/tsdx).
 
 ## Local Development
 
