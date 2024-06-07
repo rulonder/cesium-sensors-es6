@@ -12,7 +12,6 @@ import { Property as _Property, PropertyExtended } from 'cesium';
 
 import { CustomSensorVolume } from '../custom/custom-sensor-volume';
 import { removePrimitive } from '../util/remove-primitive';
-import { isWebGl2Context } from '../util/webGLContext';
 const Property: PropertyExtended = _Property as unknown as PropertyExtended;
 
 var defaultIntersectionColor = Color.WHITE;
@@ -118,9 +117,7 @@ CustomPatternSensorVisualizer.prototype.update = function (time) {
 
     var primitive = defined(data) ? data.primitive : undefined;
     if (!defined(primitive)) {
-      primitive = new CustomSensorVolume({
-        webgl2: isWebGl2Context(this._scene),
-      });
+      primitive = new CustomSensorVolume();
       primitive.id = entity;
       primitives.add(primitive);
 
