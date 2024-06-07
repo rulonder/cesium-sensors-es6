@@ -33,11 +33,11 @@ var attributeLocations = {
 };
 
 const getCustomSensorVolumeFS = function () {
-  return  CustomSensorVolumeFS2 ;
+  return CustomSensorVolumeFS2;
 };
 
 const getCustomSensorVolumeVS = function () {
-  return CustomSensorVolumeVS2 ;
+  return CustomSensorVolumeVS2;
 };
 
 var FAR = 5906376272000.0; // distance from the Sun to Pluto in meters.
