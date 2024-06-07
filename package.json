@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -22,7 +22,7 @@
     "prepare": "tsdx build"
   },
   "peerDependencies": {
-    "cesium": "1.71.0 - 1.101.0"
+    "cesium": "^1.102.0"
   },
   "husky": {
     "hooks": {
@@ -39,7 +39,7 @@
   "author": "raulns@gmail.com",
   "module": "dist/cesium-sensors-es6.esm.js",
   "devDependencies": {
-    "cesium": "1.101.0",
+    "cesium": "1.102.0",
     "eslint-plugin-prettier": "^5.0.0",
     "husky": "^4.3.8",
     "prettier": "^3.3.1",

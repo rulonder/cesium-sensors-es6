@@ -10,6 +10,10 @@ A Cesium plugin for visualizing sensor volumes. Based on [cesium-sensors](https:
 $ npm install --save cesium-sensors-es6
 ```
 
+## Compatibility
+
+As of Cesium version 1.102 the default webgl contexts uses webgl2 and therefore the custom shaders in the library need to be aligned. for this reason , version 0.x are compatible with WebGL1 shader whiler versions 1.x and above with webGL2 i.e. cesium versions above 1.102 use the library version according to your cesium version.
+
 ## Usage
 
 Prebuilt minified and unminified versions of the plugin are in the [dist](dist/) directory.
