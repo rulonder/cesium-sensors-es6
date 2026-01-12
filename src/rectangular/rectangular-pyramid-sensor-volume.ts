@@ -1,11 +1,11 @@
 import { clone } from 'cesium';
-import { defaultValue } from 'cesium';
 import { defined } from 'cesium';
 import { destroyObject } from 'cesium';
 import { DeveloperError } from 'cesium';
 import { Math as CesiumMath } from 'cesium';
 import { Spherical } from 'cesium';
 import { CustomSensorVolume } from '../custom/custom-sensor-volume';
+import { Frozen } from 'cesium';
 
 var defineProperties = Object.defineProperties;
 
@@ -43,19 +43,16 @@ function updateDirections(rectangularSensor) {
 }
 
 export function RectangularPyramidSensorVolume(this: any, options?) {
-  options = defaultValue(options, (defaultValue as any).EMPTY_OBJECT);
+  options = options ?? Frozen.EMPTY_OBJECT;
 
   var customSensorOptions = clone(options);
-  customSensorOptions._pickPrimitive = defaultValue(
-    options._pickPrimitive,
-    this
-  );
+  customSensorOptions._pickPrimitive = options._pickPrimitive ?? this;
   customSensorOptions.directions = undefined;
   customSensorOptions.webgl2 = options.webgl2;
   this._customSensor = new CustomSensorVolume(customSensorOptions);
 
-  this._xHalfAngle = defaultValue(options.xHalfAngle, CesiumMath.PI_OVER_TWO);
-  this._yHalfAngle = defaultValue(options.yHalfAngle, CesiumMath.PI_OVER_TWO);
+  this._xHalfAngle = options.xHalfAngle ?? CesiumMath.PI_OVER_TWO;
+  this._yHalfAngle = options.yHalfAngle ?? CesiumMath.PI_OVER_TWO;
 
   updateDirections(this);
 }
