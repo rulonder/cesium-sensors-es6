@@ -1,4 +1,3 @@
-import { defaultValue } from 'cesium';
 import { defined } from 'cesium';
 import { DeveloperError } from 'cesium';
 import { Event } from 'cesium';
@@ -138,24 +137,13 @@ RectangularSensorGraphics.prototype.merge = function (source) {
   }
   // >>includeEnd('debug');
 
-  this.xHalfAngle = defaultValue(this.xHalfAngle, source.xHalfAngle);
-  this.yHalfAngle = defaultValue(this.yHalfAngle, source.yHalfAngle);
-  this.radius = defaultValue(this.radius, source.radius);
-  this.show = defaultValue(this.show, source.show);
-  this.showIntersection = defaultValue(
-    this.showIntersection,
-    source.showIntersection
-  );
-  this.intersectionColor = defaultValue(
-    this.intersectionColor,
-    source.intersectionColor
-  );
-  this.intersectionWidth = defaultValue(
-    this.intersectionWidth,
-    source.intersectionWidth
-  );
-  this.lateralSurfaceMaterial = defaultValue(
-    this.lateralSurfaceMaterial,
-    source.lateralSurfaceMaterial
-  );
+  this.xHalfAngle = this.xHalfAngle ?? source.xHalfAngle;
+  this.yHalfAngle = this.yHalfAngle ?? source.yHalfAngle;
+  this.radius = this.radius ?? source.radius;
+  this.show = this.show ?? source.show;
+  this.showIntersection = this.showIntersection ?? source.showIntersection;
+  this.intersectionColor = this.intersectionColor ?? source.intersectionColor;
+  this.intersectionWidth = this.intersectionWidth ?? source.intersectionWidth;
+  this.lateralSurfaceMaterial =
+    this.lateralSurfaceMaterial ?? source.lateralSurfaceMaterial;
 };

@@ -3,7 +3,6 @@ import { Cartesian3 } from 'cesium';
 import { Color } from 'cesium';
 import { combine } from 'cesium';
 import { ComponentDatatype } from 'cesium';
-import { defaultValue } from 'cesium';
 import { defined } from 'cesium';
 import { destroyObject } from 'cesium';
 import { DeveloperError } from 'cesium';
@@ -21,6 +20,7 @@ import { BlendingState } from 'cesium';
 import { CullFace } from 'cesium';
 import { Material } from 'cesium';
 import { SceneMode } from 'cesium';
+import { Frozen } from 'cesium';
 
 import CustomSensorVolumeFS2 from './custom-sensor-volume-fs2.glsl';
 import CustomSensorVolumeVS2 from './custom-sensor-volume-vs2.glsl';
@@ -49,10 +49,10 @@ var FAR = 5906376272000.0; // distance from the Sun to Pluto in meters.
  * @constructor
  */
 export var CustomSensorVolume = function (this: any, options?) {
-  options = defaultValue(options, (defaultValue as any).EMPTY_OBJECT);
+  options = options ?? Frozen.EMPTY_OBJECT;
 
   this._pickId = undefined;
-  this._pickPrimitive = defaultValue(options._pickPrimitive, this);
+  this._pickPrimitive = options._pickPrimitive ?? this;
 
   this._frontFaceColorCommand = new DrawCommand();
   this._backFaceColorCommand = new DrawCommand();
@@ -81,7 +81,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    * @type {Boolean}
    * @default true
    */
-  this.show = defaultValue(options.show, true);
+  this.show = options.show ?? true;
 
   /**
    * <code>true</code> if webgl2 context is used, <code>false</code>
@@ -89,7 +89,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    * @type {Boolean}
    * @default true
    */
-  this.webgl2 = defaultValue(options.webgl2, false);
+  this.webgl2 = options.webgl2 ?? false;
 
   /**
    * When <code>true</code>, a polyline is shown where the sensor outline intersections the globe.
@@ -100,7 +100,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    *
    * @see CustomSensorVolume#intersectionColor
    */
-  this.showIntersection = defaultValue(options.showIntersection, true);
+  this.showIntersection = options.showIntersection ?? true;
 
   /**
    * <p>
@@ -111,7 +111,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    * @type {Boolean}
    * @default false
    */
-  this.showThroughEllipsoid = defaultValue(options.showThroughEllipsoid, false);
+  this.showThroughEllipsoid = options.showThroughEllipsoid ?? false;
   this._showThroughEllipsoid = this.showThroughEllipsoid;
 
   /**
@@ -134,9 +134,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    * var center = Cesium.Cartesian3.fromDegrees(-75.59777, 40.03883);
    * sensor.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(center);
    */
-  this.modelMatrix = Matrix4.clone(
-    defaultValue(options.modelMatrix, Matrix4.IDENTITY)
-  );
+  this.modelMatrix = Matrix4.clone(options.modelMatrix ?? Matrix4.IDENTITY);
   this._modelMatrix = new Matrix4();
 
   /**
@@ -145,7 +143,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    * @type {Number}
    * @default {@link Number.POSITIVE_INFINITY}
    */
-  this.radius = defaultValue(options.radius, Number.POSITIVE_INFINITY);
+  this.radius = options.radius ?? Number.POSITIVE_INFINITY;
 
   this._directions = undefined;
   this._directionsDirty = false;
@@ -185,7 +183,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    * @see CustomSensorVolume#showIntersection
    */
   this.intersectionColor = Color.clone(
-    defaultValue(options.intersectionColor, Color.WHITE)
+    options.intersectionColor ?? Color.WHITE
   );
 
   /**
@@ -196,7 +194,7 @@ export var CustomSensorVolume = function (this: any, options?) {
    *
    * @see CustomSensorVolume#showIntersection
    */
-  this.intersectionWidth = defaultValue(options.intersectionWidth, 5.0);
+  this.intersectionWidth = options.intersectionWidth ?? 5.0;
 
   /**
    * User-defined object returned when the sensors is picked.

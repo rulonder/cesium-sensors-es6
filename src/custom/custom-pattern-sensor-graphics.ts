@@ -1,4 +1,4 @@
-import { defaultValue } from 'cesium';
+import { Frozen } from 'cesium';
 import { defined } from 'cesium';
 import { DeveloperError } from 'cesium';
 import { Event } from 'cesium';
@@ -31,7 +31,7 @@ export function CustomPatternSensorGraphics(this: any, options?: any) {
   this._showSubscription = undefined;
   this._definitionChanged = new Event();
 
-  this.merge(defaultValue(options, (defaultValue as any).EMPTY_OBJECT));
+  this.merge(options ?? Frozen.EMPTY_OBJECT);
 }
 
 defineProperties(CustomPatternSensorGraphics.prototype, {
@@ -133,23 +133,12 @@ CustomPatternSensorGraphics.prototype.merge = function (source) {
   }
   // >>includeEnd('debug');
 
-  this.directions = defaultValue(this.directions, source.directions);
-  this.radius = defaultValue(this.radius, source.radius);
-  this.show = defaultValue(this.show, source.show);
-  this.showIntersection = defaultValue(
-    this.showIntersection,
-    source.showIntersection
-  );
-  this.intersectionColor = defaultValue(
-    this.intersectionColor,
-    source.intersectionColor
-  );
-  this.intersectionWidth = defaultValue(
-    this.intersectionWidth,
-    source.intersectionWidth
-  );
-  this.lateralSurfaceMaterial = defaultValue(
-    this.lateralSurfaceMaterial,
-    source.lateralSurfaceMaterial
-  );
+  this.directions = this.directions ?? source.directions;
+  this.radius = this.radius ?? source.radius;
+  this.show = this.show ?? source.show;
+  this.showIntersection = this.showIntersection ?? source.showIntersection;
+  this.intersectionColor = this.intersectionColor ?? source.intersectionColor;
+  this.intersectionWidth = this.intersectionWidth ?? source.intersectionWidth;
+  this.lateralSurfaceMaterial =
+    this.lateralSurfaceMaterial ?? source.lateralSurfaceMaterial;
 };

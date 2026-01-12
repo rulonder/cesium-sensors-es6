@@ -1,6 +1,6 @@
-import { defaultValue } from 'cesium';
 import { defined } from 'cesium';
 import { DeveloperError } from 'cesium';
+import { Frozen } from 'cesium';
 import { Event } from 'cesium';
 import { createMaterialPropertyDescriptor } from 'cesium';
 import { createPropertyDescriptor } from 'cesium';
@@ -34,7 +34,7 @@ export function ConicSensorGraphics(this: any, options?: any) {
   this._show = undefined;
   this._showSubscription = undefined;
   this._definitionChanged = new Event();
-  this.merge(defaultValue(options, (defaultValue as any).EMPTY_OBJECT));
+  this.merge(options ?? Frozen.EMPTY_OBJECT);
 }
 
 defineProperties(ConicSensorGraphics.prototype, {
@@ -160,38 +160,15 @@ ConicSensorGraphics.prototype.merge = function (source: any) {
   }
   // >>includeEnd('debug');
 
-  this.show = defaultValue(this.show, source.show);
-  this.innerHalfAngle = defaultValue(
-    this.innerHalfAngle,
-    source.innerHalfAngle
-  );
-  this.outerHalfAngle = defaultValue(
-    this.outerHalfAngle,
-    source.outerHalfAngle
-  );
-  this.minimumClockAngle = defaultValue(
-    this.minimumClockAngle,
-    source.minimumClockAngle
-  );
-  this.maximumClockAngle = defaultValue(
-    this.maximumClockAngle,
-    source.maximumClockAngle
-  );
-  this.radius = defaultValue(this.radius, source.radius);
-  this.showIntersection = defaultValue(
-    this.showIntersection,
-    source.showIntersection
-  );
-  this.intersectionColor = defaultValue(
-    this.intersectionColor,
-    source.intersectionColor
-  );
-  this.intersectionWidth = defaultValue(
-    this.intersectionWidth,
-    source.intersectionWidth
-  );
-  this.lateralSurfaceMaterial = defaultValue(
-    this.lateralSurfaceMaterial,
-    source.lateralSurfaceMaterial
-  );
+  this.show = this.show ?? source.show;
+  this.innerHalfAngle = this.innerHalfAngle ?? source.innerHalfAngle;
+  this.outerHalfAngle = this.outerHalfAngle ?? source.outerHalfAngle;
+  this.minimumClockAngle = this.minimumClockAngle ?? source.minimumClockAngle;
+  this.maximumClockAngle = this.maximumClockAngle ?? source.maximumClockAngle;
+  this.radius = this.radius ?? source.radius;
+  this.showIntersection = this.showIntersection ?? source.showIntersection;
+  this.intersectionColor = this.intersectionColor ?? source.intersectionColor;
+  this.intersectionWidth = this.intersectionWidth ?? source.intersectionWidth;
+  this.lateralSurfaceMaterial =
+    this.lateralSurfaceMaterial ?? source.lateralSurfaceMaterial;
 };
